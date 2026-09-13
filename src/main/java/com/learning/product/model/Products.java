@@ -81,13 +81,13 @@ public class Products {
         this.quantity = quantity;
     }
 
-    public void Product(){
-
-    }
     public Products(String name, String description, BigDecimal price, BigDecimal quantity) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
+    }
+    public Products() {
+
     }
 }

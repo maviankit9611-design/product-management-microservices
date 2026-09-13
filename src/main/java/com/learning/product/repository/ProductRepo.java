@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.learning.product.model.Products;
 import org.springframework.stereotype.Repository;
 
+import java.awt.print.Pageable;
+
 @Repository
 @Transactional
 public interface ProductRepo
