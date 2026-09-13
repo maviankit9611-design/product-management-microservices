@@ -29,7 +29,7 @@ public class Products {
     private BigDecimal price;
     @PositiveOrZero(message = "Stock quantity must be greater than zero")
     @Column(nullable = false)
-    private Long quantity;
+    private BigDecimal quantity;
 
     public String getName() {
         return name;
@@ -70,15 +70,24 @@ public class Products {
     /**
      * @return the quantity
      */
-    public Long getQuantity() {
+    public BigDecimal getQuantity() {
         return quantity;
     }
 
     /**
      * @param quantity the quantity to set
      */
-    public void setQuantity(Long quantity) {
+    public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
     }
 
+    public void Product(){
+
+    }
+    public Products(String name, String description, BigDecimal price, BigDecimal quantity) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+    }
 }
