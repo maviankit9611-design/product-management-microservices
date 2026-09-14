@@ -2,16 +2,18 @@ package com.learning.product.model;
 
 import java.math.BigDecimal;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
+@Table(indexes = {
+        @Index(
+                name ="idx_product_name",
+                columnList="name"
+        )
+})
 public class Products {
 
     @Id

@@ -32,19 +32,31 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProductById(id));
     }
     @PostMapping
-    public ResponseEntity<ProductResponse> addProduct(@Valid @RequestBody ProductRequest product) {
+    public ResponseEntity<ProductResponse> addProduct(@Valid @RequestBody ProductRequest request) {
         logger.info("addProductController");
-        return ResponseEntity.status(HttpStatus.CREATED).body(productService.addProduct(product));
+        return ResponseEntity.status(HttpStatus.CREATED).body(productService.addProduct(request));
     }
     @PutMapping ("/{id}")
-    public ResponseEntity<ProductResponse> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductRequest product) {
+    public ResponseEntity<ProductResponse> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductRequest request) {
         logger.info("updateProductController");
-        return ResponseEntity.ok(productService.updateProduct(id, product));
+        return ResponseEntity.ok(productService.updateProduct(id, request));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
         logger.info("deleteProductController");
         return ResponseEntity.ok(productService.deleteProduct(id));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Page<ProductResponse>> searchProducts(
+            @RequestParam String name,
+            Pageable pageable) {
+
+        logger.info("Searching products with name: {}", name);
+
+        return ResponseEntity.ok(
+                productService.searchProducts(name, pageable)
+        );
     }
 
 }
