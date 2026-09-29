@@ -76,4 +76,14 @@ public class ProductController {
                                 productService.searchProducts(name, pageable));
         }
 
+        @PutMapping("/{id}/reduce-stock")
+        public ResponseEntity<Void> reduceStock(
+                @PathVariable Long id,
+                @RequestParam Long quantity) {
+
+                productService.reduceStock(id, quantity);
+
+                return ResponseEntity.ok().build();
+        }
+
 }
