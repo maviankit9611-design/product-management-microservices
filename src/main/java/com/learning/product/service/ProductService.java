@@ -2,6 +2,7 @@ package com.learning.product.service;
 
 import com.learning.product.dto.ProductRequest;
 import com.learning.product.dto.ProductResponse;
+import com.learning.product.exception.InsufficientStockException;
 import com.learning.product.exception.ProductNotFound;
 import com.learning.product.model.Products;
 import com.learning.product.repository.ProductRepo;
@@ -93,6 +94,21 @@ public class ProductService {
                 );
 
         return productsPage.map(this::mapToResponse);
+    }
+
+    @Transactional
+    public void reduceStock(Long productId, Long quantity) {
+
+        int updatedRows = productRepo.reduceStock(
+                productId,
+                quantity
+        );
+
+        if (updatedRows == 0) {
+            throw new InsufficientStockException(
+                    "Insufficient stock for product: " + productId
+            );
+        }
     }
 }
 

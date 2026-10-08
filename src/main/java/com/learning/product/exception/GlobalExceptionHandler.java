@@ -61,4 +61,21 @@ Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
                 .body(response);
     }
 
+    @ExceptionHandler(InsufficientStockException.class)
+    public ResponseEntity<ValidationErrorResponse> handleInsufficientStockException(){
+        Map<String, String> errors = new LinkedHashMap<>();
+        errors.put("productId", "Insufficient stock");
+        ValidationErrorResponse response =
+                new ValidationErrorResponse(
+                        LocalDateTime.now(),
+                        HttpStatus.BAD_REQUEST.value(),
+                        "Validation Failed",
+                        errors
+                );
+        return ResponseEntity
+                .badRequest()
+                .body(response);
+
+    }
+
 }
