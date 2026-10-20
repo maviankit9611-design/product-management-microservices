@@ -86,4 +86,13 @@ public class ProductController {
                 return ResponseEntity.ok().build();
         }
 
+        @PutMapping("/{id}/restore-stock")
+        public ResponseEntity<Void> restoreStock(
+                @PathVariable Long id,
+                @RequestParam Long quantity) {
+
+                productService.restoreStock(id, quantity);
+                return ResponseEntity.ok().build();
+        }
+
 }

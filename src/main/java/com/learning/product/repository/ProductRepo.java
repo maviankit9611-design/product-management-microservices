@@ -32,4 +32,15 @@ public interface ProductRepo
             @Param("productId") Long productId,
             @Param("quantity") Long quantity
     );
+
+    @Modifying
+    @Query("""
+    UPDATE Products p
+    SET p.quantity = p.quantity + :quantity
+    WHERE p.id = :productId
+""")
+    int restoreStock(
+            @Param("productId") Long productId,
+            @Param("quantity") Long quantity
+    );
 }

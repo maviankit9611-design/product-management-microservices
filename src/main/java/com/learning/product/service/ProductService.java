@@ -110,5 +110,13 @@ public class ProductService {
             );
         }
     }
+
+    @Transactional
+    public void restoreStock(Long productId, Long quantity) {
+        int updatedRows = productRepo.restoreStock(productId, quantity);
+        if (updatedRows == 0) {
+            throw new ProductNotFound("Product not found: " + productId);
+        }
+    }
 }
 
